@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal tests basic tests matches the snapshot 1`] = `
+.c0 {
+  display: block;
+  width: 360px;
+  height: 640px;
+}
+
+<div
+  className="c0"
+  id="mobile-wrapper"
+/>
+`;

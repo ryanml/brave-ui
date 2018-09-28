@@ -5,9 +5,10 @@
 import * as React from 'react'
 import { withState } from '@dump247/storybook-state'
 import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, text, object, number } from '@storybook/addon-knobs'
+import { withKnobs, boolean, text, object, number, select } from '@storybook/addon-knobs'
 
 // Components
+import MobileWrapper from '../../../src/components/mobile/mobileWrapper'
 import Settings from './settings/settings'
 import { SiteBanner, Tip, PanelWelcome, WalletPanel, WalletSummary, WalletSummarySlider, WalletWrapper } from '../../../src/features/rewards'
 import { BatColorIcon, WalletAddIcon } from '../../../src/components/icons'
@@ -29,7 +30,7 @@ const dummyOptInAction = () => {
   console.log(dummyOptInAction)
 }
 
-storiesOf('Feature Components/Rewards/Concepts', module)
+storiesOf('Feature Components/Rewards/Concepts/Desktop', module)
   .addDecorator(withKnobs)
   .add('Settings Page', () => <Settings />)
   .add('Welcome Page', () => (
@@ -251,3 +252,18 @@ storiesOf('Feature Components/Rewards/Concepts', module)
       </div>
     )
   }))
+
+storiesOf('Feature Components/Rewards/Concepts/Mobile', module)
+  .addDecorator(withKnobs)
+  .add('Welcome Page', () => {
+    return (
+      <div style={{ position: 'absolute', top: '50px', left: '560px' }}>
+        <MobileWrapper device={select('Device', { GalaxyS5: 'GalaxyS5', Pixel2: 'Pixel2', Pixel2XL: 'Pixel2XL' }, 'GalaxyS5')}>
+          <WelcomePage
+            id={'welcome-page'}
+            optInAction={dummyOptInAction}
+          />
+        </MobileWrapper>
+      </div>
+    )
+  })
