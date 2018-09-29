@@ -13,6 +13,7 @@ import Settings from './settings/settings'
 import { SiteBanner, Tip, PanelWelcome, WalletPanel, WalletSummary, WalletSummarySlider, WalletWrapper } from '../../../src/features/rewards'
 import { BatColorIcon, WalletAddIcon } from '../../../src/components/icons'
 import WelcomePage from '../../../src/features/rewards/welcomePage'
+import WelcomePageMobile from '../../../src/features/rewards/mobile/welcomePageMobile'
 
 const bartBaker = require('../../assets/img/bartBaker.jpeg')
 const siteBgImage = require('../../assets/img/bg_siteBanner.jpg')
@@ -256,10 +257,21 @@ storiesOf('Feature Components/Rewards/Concepts/Desktop', module)
 storiesOf('Feature Components/Rewards/Concepts/Mobile', module)
   .addDecorator(withKnobs)
   .add('Welcome Page', () => {
+    const mobileDevices = { 
+      GalaxyS5: 'GalaxyS5', 
+      Pixel2: 'Pixel2', 
+      Pixel2XL: 'Pixel2XL',
+      iPhone5SE: 'iPhone5SE',
+      iPhoneX: 'iPhoneX'
+    }
+
     return (
-      <div style={{ position: 'absolute', top: '50px', left: '560px' }}>
-        <MobileWrapper device={select('Device', { GalaxyS5: 'GalaxyS5', Pixel2: 'Pixel2', Pixel2XL: 'Pixel2XL' }, 'GalaxyS5')}>
-          <WelcomePage
+      <div style={{ display: 'table', margin: '0 auto' }}>
+        <MobileWrapper
+          portrait={boolean('Portrait', true)}
+          device={select('Device', mobileDevices, 'GalaxyS5')}
+        >
+          <WelcomePageMobile
             id={'welcome-page'}
             optInAction={dummyOptInAction}
           />

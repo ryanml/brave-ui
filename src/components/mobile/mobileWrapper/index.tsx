@@ -5,26 +5,36 @@
 import * as React from 'react'
 import { StyledWrapper } from './style'
 
-export type Device = 'GalaxyS5' | 'Pixel2' | 'Pixel2XL'
+export type Device = 'GalaxyS5' | 'Pixel2' | 'Pixel2XL' | 'iPhone5SE' | 'iPhoneX'
+
+export type DeviceObj = {
+  name: Device
+  width: string
+  height: string
+  [key: string]: string
+}
 
 export interface Props {
   id?: string
-  children: React.ReactNode
   device?: Device
+  portrait?: boolean
+  children: React.ReactNode
 }
 
 export default class MobileWrapper extends React.PureComponent<Props, {}> {
   static defaultProps = {
-    device: 'GalaxyS5'
+    device: 'GalaxyS5',
+    portrait: true
   }
 
   render () {
-    const { id, children, device } = this.props
+    const { id, device, portrait, children } = this.props
 
     return (
       <StyledWrapper
         id={id}
         device={device}
+        portrait={portrait}
       >
         {children}
       </StyledWrapper>

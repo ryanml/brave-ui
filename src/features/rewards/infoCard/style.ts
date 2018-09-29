@@ -4,6 +4,11 @@
 
 import styled from 'styled-components'
 
+interface StyleProps {
+  numColumns: number
+  singleColumn: boolean
+}
+
 export const StyledInfoCard = styled<{}, 'div'>('div')`
   height: 290px;
   border-radius: 4px;
@@ -41,11 +46,12 @@ export const StyledFigure = styled<{}, 'figure'>('figure')`
   margin: 10px auto 20px;
   height: 80px;
 `
-export const StyledGrid = styled<{}, 'div'>('div')`
+export const StyledGrid = styled<StyleProps, 'div'>('div')`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: center;
+  grid-gap: ${p => p.singleColumn ? '40px' : '0px'};
+  grid-template-columns: repeat(${p => p.singleColumn ? '1' : p.numColumns}, 1fr);
 `
 
 export const StyledColumn = styled<{}, 'div'>('div')`

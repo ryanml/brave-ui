@@ -21,13 +21,21 @@ export interface CardProps {
 
 export interface Props {
   id?: string
+  singleColumn: boolean
   cards?: CardProps[]
 }
 
 export default class InfoCard extends React.PureComponent<Props, {}> {
-  getCards (items: CardProps[]) {
+  static defaultProps = {
+    singleColumn: false
+  }
+
+  getCards (items: CardProps[], singleColumn: boolean) {
     return (
-      <StyledGrid>
+      <StyledGrid 
+        numColumns={items.length} 
+        singleColumn={singleColumn}
+      >
         {items.map((item: CardProps, index: number) => {
           return <StyledColumn key={`${index}`}>
             <StyledInfoCard>
@@ -44,12 +52,12 @@ export default class InfoCard extends React.PureComponent<Props, {}> {
   }
 
   render () {
-    const { id, cards } = this.props
+    const { id, cards, singleColumn } = this.props
     return (
       <section id={id}>
         {
           cards
-          ? this.getCards(cards)
+          ? this.getCards(cards, singleColumn)
           : null
         }
       </section>
